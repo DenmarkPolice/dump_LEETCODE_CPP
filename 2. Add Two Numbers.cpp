@@ -14,34 +14,38 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        //std::cout << l1->val << std::endl;
         int x = 0;
         int first_node = 0;
         int second_node = 0;
+        //Loop 
         while(l1 != nullptr || l2 !=  nullptr) {
             int upphojt = int(pow(10,x));
             if(l1 != nullptr) {
                 first_node += l1->val*upphojt;
+                l1 = l1->next;
             }
             
             if(l2 != nullptr) {
                 second_node += l2->val*upphojt;
+                l2 = l2->next;
             }
-            l1 = l1->next;
-            l2 = l2->next;
             x += 1;
         }
+        //Total value
         int int_output = first_node + second_node;
-        std::cout << int_output << std::endl;
-        std::cout << int(int_output/(pow(10,x)/10)) << std::endl;
-        ListNode last_node = ListNode(int(int_output/(pow(10,x)/10)));
-        ListNode* last_ptr = &last_node;
-        x -= 1;
         
-        while(x != 0) {
-            
+        //Make the first one before the loop so we can save a pointer
+        int tmp_val = int_output % 10;
+        int_output = int_output / 10;
+        ListNode* first = new ListNode(tmp_val);
+        ListNode* tmp = first;
+        //Loop and make pointers until the the total value is 0
+        while(int_output != 0) {
+            tmp_val = int_output % 10;
+            int_output = int_output / 10;
+            tmp->next = new ListNode(tmp_val);
+            tmp = tmp->next;
         }
-        std::cout << last_ptr->val << std::endl;
-        return(l1);
+        return(first);
     }
 };
