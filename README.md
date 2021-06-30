@@ -10,3 +10,5 @@
 # Leetcode exercises
 
 2. Add Two Numbers :heavy_check_mark:
+
+7. Reverse Integer :heavy_check_mark:
