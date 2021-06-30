@@ -13,27 +13,41 @@
 #include <typeinfo>
 class Solution {
 public:
+    
+    long reverse(long x) {
+        long res = 0;
+        if(x != 0) {
+            while(x != 0) {
+                res = res*10 + x % 10;
+                x = x / 10;
+            }
+        }
+        return(res);
+    }
+    
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         int x = 0;
-        int first_node = 0;
-        int second_node = 0;
+        long int first_node = 0;
+        long int second_node = 0;
         //Loop 
         while(l1 != nullptr || l2 !=  nullptr) {
-            int upphojt = int(pow(10,x));
             if(l1 != nullptr) {
-                first_node += l1->val*upphojt;
+                first_node = first_node * 10 + l1->val;
                 l1 = l1->next;
             }
             
             if(l2 != nullptr) {
-                second_node += l2->val*upphojt;
+                second_node = second_node * 10 + l2->val;
                 l2 = l2->next;
             }
             x += 1;
         }
         //Total value
-        int int_output = first_node + second_node;
         
+        std::cout << "First node: " << reverse(first_node) << std::endl;
+        std::cout << "Second node: " << reverse(second_node) << std::endl;
+        long int_output = reverse(first_node) + reverse(second_node);
+        std::cout << int_output << std::endl;
         //Make the first one before the loop so we can save a pointer
         int tmp_val = int_output % 10;
         int_output = int_output / 10;
